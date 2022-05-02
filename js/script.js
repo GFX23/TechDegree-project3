@@ -75,26 +75,26 @@ designInput.addEventListener("change", e => {
 
 activities.addEventListener("change", e => {
     let totalCost = 0
+    // in date must be value, otherwise forEach doesnt start .. 
     let date = ["prevent"]
     regActiVal()
         // gather total cost + getting dates
         checkBoxes.forEach(box => {
+            box.removeAttribute("disabled")
             if (box.checked) {
                 totalCost += Number.parseInt(box.getAttribute("data-cost"))
                 date.push(box.getAttribute("data-day-and-time"))
-            }
+                }
         })
-
+        console.log(date)
         // testing for time collision
         checkBoxes.forEach(box => {
             date.forEach(time => {
                 if (box.getAttribute("data-day-and-time") === time && !box.checked) {
                     box.setAttribute("disabled", true)
-                } else {
-                    box.removeAttribute("disabled")
-                }
+                } 
             })
-        })
+        }) 
     total.innerHTML = `Total: $${totalCost}`
 })
 
