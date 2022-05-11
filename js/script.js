@@ -86,7 +86,6 @@ activities.addEventListener("change", e => {
                 date.push(box.getAttribute("data-day-and-time"))
                 }
         })
-        console.log(date)
         // testing for time collision
         checkBoxes.forEach(box => {
             date.forEach(time => {
