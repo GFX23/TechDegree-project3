@@ -16,7 +16,8 @@ const form = document.querySelector("form")
 const color = document.querySelector("#color")
 const actiCost = document.querySelector("#activities-cost")
 const nameHint = document.querySelector("#name-hint")
-
+const paypal = document.querySelector("#paypal")
+const bitcoin = document.querySelector("#bitcoin")
 
 nameInput.focus()
 
@@ -59,9 +60,10 @@ T-shirt info section - setting default div section to "none", then based
 on value of design input, showing possible color variants.
 */
 
-hide(colorInput)
+color.disabled = true
 designInput.addEventListener("change", e => {
-    show(colorInput)
+    color.selectedIndex = 0
+    color.disabled = false
     const options = color.children
     for (let i = 0; i < options.length; i++) {
         options[i].hidden = false
@@ -99,12 +101,22 @@ activities.addEventListener("change", e => {
 
 // Payment Info section
 
-paymentInput.value = "credit-card"
+paymentInput.selectedIndex = 1
+hide(paypal)
+hide(bitcoin)
 paymentInput.addEventListener("change", e => {
-    if (e.target.value !== "credit-card") {
-        hide(creditCardBox)
-    } else {
+    if (e.target.value === "credit-card") {
         show(creditCardBox)
+        hide(paypal)
+        hide(bitcoin)
+    } else if (e.target.value === "paypal") {
+        hide(creditCardBox)
+        hide(bitcoin)
+        show(paypal)
+    } else if (e.target.value === "bitcoin") {
+        hide(creditCardBox)
+        show(bitcoin)
+        hide(paypal)
     }
 })
 
@@ -196,8 +208,15 @@ cvvNum.addEventListener("keyup", e => cvvVal())
 // FORM SUBMIT SECTION
 
 form.addEventListener("submit", e => {
-    if (nameVal() && emailVal() && regActiVal() && (paymentInput.value === "credit-card" ? payccVal() && zipVal() && cvvVal() : true)) {
-        return true
+    if (nameVal() && emailVal() && regActiVal()) {
+        if (paymentInput.value === "credit-card") {
+            if (ccVal() && zipVal() && cvvVal()) {
+                return true
+            } else {
+                e.preventDefault()
+                return false
+            }
+        } 
     } else {
         e.preventDefault()
         nameVal()
