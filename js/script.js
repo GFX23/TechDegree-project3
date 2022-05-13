@@ -192,7 +192,6 @@ checkBoxes.forEach(box => box.addEventListener("blur", e => {
 activities.addEventListener("click", e => regActiVal())
 
 // Card validation
-
 const regExCcNum = /^\d{13,16}/
 const ccVal = () => regExCcNum.test(ccNum.value) ? (hideHint(ccNum), true) : (showHint(ccNum), false)
 ccNum.addEventListener("keyup", e => ccVal())
@@ -206,7 +205,6 @@ const cvvVal = () => regExCvv.test(cvvNum.value) ? (hideHint(cvvNum), true) : (s
 cvvNum.addEventListener("keyup", e => cvvVal())
 
 // FORM SUBMIT SECTION
-
 form.addEventListener("submit", e => {
     if (nameVal() && emailVal() && regActiVal()) {
         if (paymentInput.value === "credit-card") {
