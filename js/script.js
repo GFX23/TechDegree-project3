@@ -192,15 +192,15 @@ checkBoxes.forEach(box => box.addEventListener("blur", e => {
 activities.addEventListener("click", e => regActiVal())
 
 // Card validation
-const regExCcNum = /^\d{13,16}/
+const regExCcNum = /^\d{13,16}$/
 const ccVal = () => regExCcNum.test(ccNum.value) ? (hideHint(ccNum), true) : (showHint(ccNum), false)
 ccNum.addEventListener("keyup", e => ccVal())
 
-const regExZip = /^\d{5}/
+const regExZip = /^\d{5}$/
 const zipVal = () => regExZip.test(zipNum.value) ? (hideHint(zipNum), true) : (showHint(zipNum), false)
 zipNum.addEventListener("keyup", e => zipVal())
 
-const regExCvv = /^\d{3}/
+const regExCvv = /^\d{3}$/
 const cvvVal = () => regExCvv.test(cvvNum.value) ? (hideHint(cvvNum), true) : (showHint(cvvNum), false)
 cvvNum.addEventListener("keyup", e => cvvVal())
 
